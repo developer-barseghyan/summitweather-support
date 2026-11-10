@@ -1,0 +1,7 @@
+# Mountain Weather: Summit help site (GitHub Pages, Jekyll)
+url: "https://developer-barseghyan.github.io"
+baseurl: "/summitweather-support"
+title: "Mountain Weather: Summit"
+description: "Help pages, privacy policy and EULA for Mountain Weather: Summit, the iPhone app that forecasts the weather along your route, hour by hour, at every elevation, on 3D terrain."
+markdown: kramdown
+exclude: [README.md]

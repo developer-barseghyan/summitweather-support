@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US" class="sw-root">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+<meta name="description" content="{{ page.summary | default: site.description | escape }}">
+<meta name="color-scheme" content="dark only">
+<meta name="theme-color" content="#0C0D0F">
+<link rel="icon" type="image/png" href="{{ '/assets/favicon.png' | relative_url }}">
+<link rel="apple-touch-icon" href="{{ '/assets/icon.png' | relative_url }}">
+<style>
+/* Mountain Weather: Summit palette: near-black ground, frosted glass panels, amber route, cold blue below zero. */
+:root{
+  --sw-ground:#0C0D0F;
+  --sw-ground-raised:#15171B;
+  --sw-glass:rgba(255,255,255,.07);
+  --sw-glass-edge:rgba(255,255,255,.28);
+  --sw-hairline:#2A2C31;
+  --sw-ink:#F4F1EA;
+  --sw-ink-soft:#C9D3DE;
+  --sw-ink-faint:#9A978F;
+  --sw-amber:#F2B544;
+  --sw-amber-dim:rgba(242,181,68,.14);
+  --sw-cold:#7FC7FF;
+  --sw-cold-dim:rgba(127,199,255,.12);
+  --sw-measure:44rem;
+  --sw-gutter:clamp(16px,4vw,32px);
+  --sw-face:ui-sans-serif,-apple-system,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+  --sw-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+html.sw-root{background:var(--sw-ground);-webkit-text-size-adjust:100%;}
+body.sw-body{margin:0;background:linear-gradient(180deg,#0C0D0F 0%,#13161C 100%) fixed;color:var(--sw-ink-soft);font-family:var(--sw-face);font-size:17px;line-height:1.6}
+.sw-body *,.sw-body *::before,.sw-body *::after{box-sizing:border-box}
+
+.sw-strip{background:var(--sw-glass);border-bottom:1px solid var(--sw-hairline);box-shadow:inset 0 1px 0 var(--sw-glass-edge);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.sw-strip-inner{max-width:var(--sw-measure);margin-inline:auto;padding:14px var(--sw-gutter);display:flex;align-items:center;justify-content:space-between;gap:12px 20px;flex-wrap:wrap}
+.sw-brand{display:flex;align-items:center;gap:10px;color:var(--sw-ink);text-decoration:none}
+.sw-brand-mark{width:36px;height:36px;border-radius:9px}
+.sw-brand-text{display:flex;flex-direction:column;line-height:1.2}
+.sw-brand-name{font-weight:700;font-size:1.05rem}
+.sw-brand-line{font-family:var(--sw-mono);font-size:.72rem;color:var(--sw-amber);letter-spacing:.03em}
+
+.sw-menu{list-style:none;margin:0;padding:0;display:flex;gap:4px}
+.sw-menu-link{display:block;padding:6px 10px;color:var(--sw-ink-soft);text-decoration:none;font-size:.9rem;border-bottom:2px solid transparent}
+.sw-menu-link:hover{color:var(--sw-ink)}
+.sw-menu-link[aria-current="page"]{color:var(--sw-ink);border-bottom-color:var(--sw-amber)}
+
+.sw-page{max-width:var(--sw-measure);margin-inline:auto;padding:28px var(--sw-gutter) 40px}
+.sw-page h1{color:var(--sw-ink);font-size:clamp(1.6rem,5vw,2.1rem);line-height:1.2;margin:0 0 .5em;letter-spacing:-.01em}
+.sw-page h2{color:var(--sw-ink);font-size:1.2rem;margin:2.2em 0 .5em;padding-top:.9em;border-top:1px solid var(--sw-hairline)}
+.sw-page h3{color:var(--sw-amber);font-size:1rem;margin:1.6em 0 .3em}
+.sw-page strong{color:var(--sw-ink)}
+.sw-page a{color:var(--sw-amber);text-underline-offset:3px}
+.sw-page p,.sw-page li{overflow-wrap:anywhere}
+.sw-page ul,.sw-page ol{padding-left:1.3em}
+.sw-page li+li{margin-top:.35em}
+.sw-page blockquote{margin:1.2em 0;padding:.7em 1em;border-radius:14px;background:var(--sw-glass);box-shadow:inset 0 1px 0 var(--sw-glass-edge),0 0 0 1px var(--sw-hairline)}
+.sw-page blockquote p{margin:.3em 0;color:var(--sw-ink)}
+.sw-page blockquote.sw-cold{background:var(--sw-cold-dim)}
+.sw-page code{font-family:var(--sw-mono);font-size:.88em;color:var(--sw-ink)}
+.sw-page table{display:block;overflow-x:auto;border-collapse:collapse;margin:1.2em 0;font-size:.92rem}
+.sw-page th,.sw-page td{padding:8px 10px;border:1px solid var(--sw-hairline);text-align:left;vertical-align:top}
+.sw-page th{color:var(--sw-ink);background:var(--sw-ground-raised)}
+.sw-page dt{color:var(--sw-ink);font-weight:700;margin-top:1em}
+.sw-page dd{margin:.2em 0 0 0}
+.sw-num{font-family:var(--sw-mono);color:var(--sw-cold)}
+
+.sw-base{border-top:1px solid var(--sw-hairline)}
+.sw-base-inner{max-width:var(--sw-measure);margin-inline:auto;padding:18px var(--sw-gutter) 36px;font-size:.84rem;color:var(--sw-ink-faint)}
+.sw-base-inner a{color:var(--sw-ink-soft)}
+.sw-base-row{margin:.25em 0}
+
+@media (max-width:480px){
+  body.sw-body{font-size:16px}
+  .sw-strip-inner{padding-block:10px}
+  .sw-menu-link{padding:6px 8px}
+}
+</style>
+</head>
+<body class="sw-body">
+<div class="sw-strip">
+  <div class="sw-strip-inner">
+    <a class="sw-brand" href="{{ '/' | relative_url }}">
+      <img class="sw-brand-mark" src="{{ '/assets/icon.png' | relative_url }}" width="36" height="36" alt="">
+      <span class="sw-brand-text"><span class="sw-brand-name">Mountain Weather: Summit</span><span class="sw-brand-line">route forecast on 3D terrain</span></span>
+    </a>
+    <nav aria-label="Site pages">
+      <ul class="sw-menu">
+        <li><a class="sw-menu-link" href="{{ '/' | relative_url }}"{% if page.sw_section == "help" %} aria-current="page"{% endif %}>Help</a></li>
+        <li><a class="sw-menu-link" href="{{ '/privacy' | relative_url }}"{% if page.sw_section == "privacy" %} aria-current="page"{% endif %}>Privacy</a></li>
+        <li><a class="sw-menu-link" href="{{ '/terms' | relative_url }}"{% if page.sw_section == "terms" %} aria-current="page"{% endif %}>Terms (EULA)</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<article class="sw-page">
+{{ content }}
+</article>
+<div class="sw-base">
+  <div class="sw-base-inner">
+    <p class="sw-base-row">Mountain Weather: Summit for iPhone is built and maintained by Tigran Barseghyan. Write to <a href="mailto:developer.barseghyan@gmail.com">developer.barseghyan@gmail.com</a>.</p>
+    <p class="sw-base-row">Weather data: MET Norway (CC BY 4.0). Terrain: Mapzen / AWS Open Data Terrain Tiles. Base map by Apple Maps.</p>
+  </div>
+</div>
+</body>
+</html>
