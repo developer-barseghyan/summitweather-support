@@ -50,11 +50,11 @@ The share button at the top exports a one-page **PDF report** (Pro) with the cha
 
 ## The Verdict tab
 
-One plain answer for your plan: **clear**, **in cloud**, **storm risk**, **high wind** or **extreme cold**, with two or three lines of why (cloud base trend, freezing level, storm hour, summit wind). Under it: the **turnaround time**, which is one hour before the first storm-risk hour at the summit or late enough to get down before dark, whichever is earlier, and the daylight left after the summit.
+One plain answer for your plan: **clear**, **in cloud**, **rain**, **snow**, **storm risk**, **high wind**, **extreme cold** or **too late** (the summit comes after your turnaround time), with two or three lines of why (cloud base trend, freezing level, storm hour, summit wind). Under it: the **turnaround time**, which is one hour before the first storm-risk hour at the summit or late enough to get down before dark, whichever is earlier, and the daylight left after the summit.
 
 **This week at the summit** shows the verdict for each of the next seven days at your departure time. Tap a day to recompute the whole plan for it. The **best window** (Pro) names the clearest stretch of hours in the week.
 
-**Alert me when the forecast changes** (Pro) checks the summit a few times a day, when iOS allows it, and sends a notification when the verdict changes or a storm or high-wind hour appears within 48 hours. iOS decides when background checks run, so this is a convenience, not a guarantee.
+**Alert me when the forecast changes** (Pro) checks the forecast along your route a few times a day, when iOS allows it, and sends a notification when the verdict changes or a storm or high-wind hour appears within 48 hours. iOS decides when background checks run, so this is a convenience, not a guarantee.
 
 ## Accuracy and gaps in the data
 

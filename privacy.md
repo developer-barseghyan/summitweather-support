@@ -30,7 +30,7 @@ This page follows each path that data can take inside the app. I run no server f
 
 ## 1. Your position
 
-If you allow it, the app reads your location to set the start point of a plan where you stand and to list peaks near you. It reads location only while the app is in use. You can say no, or switch the permission off later in iOS Settings; then you place the start by tapping the map, and everything else works the same.
+If you allow it, the app reads your location to centre the map on you, to set the start point of a plan where you stand and to list peaks near you. It reads location only while the app is in use. You can say no, or switch the permission off later in iOS Settings; then you place the start by tapping the map, and everything else works the same.
 
 Your position is not stored by itself. It becomes the start point of a plan only when you choose that, and it then travels with the plan as described in section 2.
 
@@ -40,7 +40,7 @@ To forecast your route, the app sends one request per elevation step of the rout
 
 Because route coordinates may include your position, the App Store privacy label for the app lists **Location** as collected for app functionality, **not linked to you** and **not used for tracking**.
 
-Forecast responses are cached on the phone so that the app can reopen a plan without a new request and respect the service's rate limits. The app makes no weather requests while it is in the background, except the one summit check described in section 6.
+Forecast responses are cached on the phone so that the app can reopen a plan without a new request and respect the service's rate limits. The app makes no weather requests while it is in the background, except the alert check described in section 6.
 
 ## 3. Terrain tile downloads
 
@@ -58,7 +58,7 @@ Buying, renewing and restoring Pro run through Apple's StoreKit. Apple handles y
 
 ## 6. Forecast change alerts
 
-If you turn alerts on for a plan (Pro), iOS wakes the app a few times a day. The app then fetches the forecast for the plan's summit point only, compares it with the last check, and shows a local notification when the verdict changes or a storm or high-wind hour appears within 48 hours. The notification is created on the phone; no notification service outside Apple's iOS is involved, and nothing about it is sent to me.
+If you turn alerts on for a plan (Pro), iOS wakes the app a few times a day. The app then fetches the forecast for each point of that plan's route, the same requests as when you open the plan (section 2), works out the verdict as the app does, compares it with the last check, and shows a local notification when the verdict changes or a storm or high-wind hour appears at the summit within 48 hours. The notification is created on the phone; no notification service outside Apple's iOS is involved, and nothing about it is sent to me.
 
 ## 7. Files you import and export
 
@@ -70,13 +70,16 @@ A PDF report that you export goes only where you send it with the iOS share shee
 
 - Saved plans: start and summit points, waypoints or the imported track, departure time, pace and settings.
 - Cached terrain heights and forecast responses, and, for Pro users, the offline copy of each plan.
-- Your settings: units, pace defaults, appearance, alert choice.
+- Your settings: units, pace defaults, terrain exaggeration, alert choice.
+- Crash and hang diagnostics that iOS gives the app are kept on the phone only, and are shared solely when you export them yourself from Settings → Help → Export diagnostics.
 
 Removing the app from the phone erases all of this. Your normal iCloud or computer backup of the iPhone may contain this storage, as it would for any app.
 
 ## 9. Measurement and tracking
 
-Version 1.0 has no analytics, no crash reporter and no ad network. It has no account or sign-in and never asks for your email address. It does not follow you across other apps or websites, so it has no reason to show the App Tracking Transparency prompt. No data is sold, rented or handed to anyone.
+Version 1.0 has no analytics and no ad network. It has no account or sign-in and never asks for your email address. It does not follow you across other apps or websites, so it has no reason to show the App Tracking Transparency prompt. No data is sold, rented or handed to anyone.
+
+Crash reports. iOS may hand the app a crash or hang report after the fact (Apple's MetricKit). The app stores it on your phone and nowhere else. It is shared only if you export it yourself from Settings → Help → Export diagnostics. No third-party crash reporter or analytics service is used.
 
 If a later version ever adds analytics, this page and the App Store label will both be updated before that version is released.
 
