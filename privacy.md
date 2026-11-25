@@ -9,7 +9,7 @@ sw_section: privacy
 
 App: **Mountain Weather: Summit** for iPhone<br>
 Published by: Tigran Barseghyan<br>
-Effective from: 10 November 2026<br>
+Effective from: 25 November 2026<br>
 Questions: [developer.barseghyan@gmail.com](mailto:developer.barseghyan@gmail.com)
 
 This page follows each path that data can take inside the app. I run no server for it and I receive nothing from it. No personal data about you reaches me.
@@ -18,10 +18,11 @@ This page follows each path that data can take inside the app. I run no server f
 
 | Flow | Leaves the iPhone? | Who receives it |
 |---|---|---|
-| Your position | Only as route coordinates, see 1 and 2 | MET Norway (weather requests) |
+| Your position | Only when you set a start from it, see 1 | MET Norway (rounded coordinates), Amazon Web Services (tile numbers), Apple (place name) |
 | Weather requests | Yes: coordinates and elevation of your route points | MET Norway (Norwegian Meteorological Institute) |
 | Terrain tile downloads | Yes, tile numbers only | Amazon Web Services (AWS Open Data) |
-| The map view and peak search | Yes, through iOS | Apple |
+| The map view, place names and Apple Maps search | Yes, through iOS | Apple |
+| Peak suggestions while you type, peaks near you | No, from an index on the phone | Nobody |
 | Pro purchases | Yes, through iOS | Apple |
 | Notifications | No, created on the phone | Nobody |
 | GPX files you import | No | Nobody |
@@ -30,13 +31,22 @@ This page follows each path that data can take inside the app. I run no server f
 
 ## 1. Your position
 
-If you allow it, the app reads your location to centre the map on you, to set the start point of a plan where you stand and to list peaks near you. It reads location only while the app is in use. You can say no, or switch the permission off later in iOS Settings; then you place the start by tapping the map, and everything else works the same.
+Your location is used only when you ask for it: to centre the map, set a start or find peaks near you. A start you set from it is saved in your plan on this phone and sent, as coordinates, to the forecast service.
 
-Your position is not stored by itself. It becomes the start point of a plan only when you choose that, and it then travels with the plan as described in section 2.
+You ask for it on the Plan tab, with the location button, **Start at my location**, **Use my location** or **Peaks near you**. Opening the app or picking a summit does not read your position, even when you have allowed location. Once you have asked, Apple Maps shows you on the Plan tab's map until you close the app; the app keeps the position you asked for in memory until then, and uses it on the phone for the distances in the peak search and to offer **Use my location** for a summit within 50 km. You can say no to location, or switch the permission off later in iOS Settings; then you place the start by tapping the map, and everything else works the same.
+
+The app never sets a start by itself. A start you set from your position, with **Start at my location** or **Use my location**, is a point of your plan like any other:
+
+- it is saved in the plan on this phone when you show the plan's weather;
+- its coordinates, rounded to four decimals, go to MET Norway in the forecast requests (section 2);
+- it reaches the terrain tile server only as the number of the tile it lies in (section 3);
+- its coordinates go to Apple when you set it, to look up the place's name (section 4).
+
+Your position is not stored or sent otherwise. The location button only moves the map: the app sends your position to no one for it, and Apple Maps loads the area it then shows, as for any part of the map. Finding peaks near you and measuring distances happen on the phone.
 
 ## 2. Weather requests
 
-To forecast your route, the app sends one request per elevation step of the route (typically 8 to 15 points) to MET Norway's public Locationforecast service at `api.met.no`. Each request carries the point's latitude and longitude, rounded to four decimal places (about 11 m), and its elevation. If your start point is your current location, that rounded position is among them. The requests also carry a plain app identifier as the User-Agent and, as with any web request, your IP address. The app adds no identifier for you, and MET Norway cannot tell which requests belong to the same person beyond what any web server sees. MET Norway's own terms and privacy policy govern what its servers log.
+To forecast your route, the app sends one request per elevation step of the route (8 to 40 points, about one per 150 m of climb) to MET Norway's public Locationforecast service at `api.met.no`. Each request carries the point's latitude and longitude, rounded to four decimal places (about 11 m), and its elevation. If your start was set from your location, that rounded position is among them. The requests also carry a plain app identifier as the User-Agent and, as with any web request, your IP address. The app adds no identifier for you, and MET Norway cannot tell which requests belong to the same person beyond what any web server sees. MET Norway's own terms and privacy policy govern what its servers log.
 
 Because route coordinates may include your position, the App Store privacy label for the app lists **Location** as collected for app functionality, **not linked to you** and **not used for tracking**.
 
@@ -44,13 +54,13 @@ Forecast responses are cached on the phone so that the app can reopen a plan wit
 
 ## 3. Terrain tile downloads
 
-The 3D mountain and the route profile need ground heights. The app fetches them from the public AWS Open Data Terrain Tiles bucket (`s3.amazonaws.com/elevation-tiles-prod`). Each request names a tile by its grid numbers; a tile covers a patch of several kilometres, not an exact point. The request carries the same plain User-Agent and your IP address. Amazon's own policies decide what its servers log.
+The 3D mountain and the route profile need ground heights. The app fetches them from the public AWS Open Data Terrain Tiles bucket (`s3.amazonaws.com/elevation-tiles-prod`). Each request names a tile by its grid numbers; a tile covers a patch of several kilometres, not an exact point. Nothing is fetched before you have set both a start and a summit: then the tiles along the route are, and the rest when you show the route's weather. The request carries the same plain User-Agent and your IP address. Amazon's own policies decide what its servers log.
 
 Downloaded heights stay in the app's cache so that the next plan and offline use need no fresh download. The three demo routes ship with their terrain inside the app.
 
-## 4. The map view and peak search
+## 4. The map view, place names and search
 
-The map on the Plan tab is Apple Maps, drawn by iOS. Typing a peak name uses Apple's place search. Apple handles those requests under its own privacy policy.
+The map on the Plan tab is Apple Maps, drawn by iOS. Peak suggestions as you type come from an index stored on the phone and send nothing. Apple's place search runs only when you ask for it (**Search Apple Maps**, or Return when no peak matches); it receives the text you typed and the part of the map you are looking at. When you set a start or a summit, the app asks Apple for the place's name and time zone, with that point's coordinates. Apple handles these requests under its own privacy policy.
 
 ## 5. Pro purchases
 
@@ -58,7 +68,7 @@ Buying, renewing and restoring Pro run through Apple's StoreKit. Apple handles y
 
 ## 6. Forecast change alerts
 
-If you turn alerts on for a plan (Pro), iOS wakes the app a few times a day. The app then fetches the forecast for each point of that plan's route, the same requests as when you open the plan (section 2), works out the verdict as the app does, compares it with the last check, and shows a local notification when the verdict changes or a storm or high-wind hour appears at the summit within 48 hours. The notification is created on the phone; no notification service outside Apple's iOS is involved, and nothing about it is sent to me.
+If you turn alerts on (Pro), the app watches your latest plan. iOS may wake the app a few times a day; iOS decides how often. The app then fetches the forecast for each point of that plan's route, the same requests as when you open the plan (section 2), works out the verdict as the app does, compares it with the last check, and shows a local notification when the verdict changes or a storm or high-wind hour appears at the summit within 48 hours. The notification is created on the phone; no notification service outside Apple's iOS is involved, and nothing about it is sent to me.
 
 ## 7. Files you import and export
 
