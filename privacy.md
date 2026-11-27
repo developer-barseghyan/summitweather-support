@@ -9,7 +9,7 @@ sw_section: privacy
 
 App: **Mountain Weather: Summit** for iPhone<br>
 Published by: Tigran Barseghyan<br>
-Effective from: 25 November 2026<br>
+Effective from: 27 November 2026<br>
 Questions: [developer.barseghyan@gmail.com](mailto:developer.barseghyan@gmail.com)
 
 This page follows each path that data can take inside the app. I run no server for it and I receive nothing from it. No personal data about you reaches me.
@@ -46,7 +46,7 @@ Your position is not stored or sent otherwise. The location button only moves th
 
 ## 2. Weather requests
 
-To forecast your route, the app sends one request per elevation step of the route (8 to 40 points, about one per 150 m of climb) to MET Norway's public Locationforecast service at `api.met.no`. Each request carries the point's latitude and longitude, rounded to four decimal places (about 11 m), and its elevation. If your start was set from your location, that rounded position is among them. The requests also carry a plain app identifier as the User-Agent and, as with any web request, your IP address. The app adds no identifier for you, and MET Norway cannot tell which requests belong to the same person beyond what any web server sees. MET Norway's own terms and privacy policy govern what its servers log.
+To forecast your route, the app sends one request per point of the route (up to 40 points, about one per 150 m of climb or 500 m of trail; points within 300 m and 100 m of height of each other share one request) to MET Norway's public Locationforecast service at `api.met.no`. Each request carries the point's latitude and longitude, rounded to four decimal places (about 11 m), and its elevation. If your start was set from your location, that rounded position is among them. The requests also carry a plain app identifier as the User-Agent and, as with any web request, your IP address. The app adds no identifier for you, and MET Norway cannot tell which requests belong to the same person beyond what any web server sees. MET Norway's own terms and privacy policy govern what its servers log.
 
 Because route coordinates may include your position, the App Store privacy label for the app lists **Location** as collected for app functionality, **not linked to you** and **not used for tracking**.
 

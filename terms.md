@@ -9,7 +9,7 @@ sw_section: terms
 
 App: **Mountain Weather: Summit** for iPhone<br>
 Licensor: Tigran Barseghyan, an independent developer based in Armenia<br>
-Effective from: 10 November 2026<br>
+Effective from: 27 November 2026<br>
 Questions: [developer.barseghyan@gmail.com](mailto:developer.barseghyan@gmail.com)
 
 This end user license agreement (EULA) sets the rules for using Mountain Weather: Summit (below, "the app"). Installing or opening the app means you accept it. If you reject it, delete the app and stop using it.
@@ -68,7 +68,7 @@ This end user license agreement (EULA) sets the rules for using Mountain Weather
 
 **D7. Refunds and price changes.** Apple processes all purchases under its own terms. Refund requests go to Apple, not to me. Prices for future purchases and renewals may change. Apple asks for your consent where the law requires it.
 
-**D8. When Pro ends.** The app falls back to its free features. Your saved plans are kept, and the latest one stays usable.
+**D8. When Pro ends.** The app falls back to its free features. Your saved plans stay on the phone until you show the weather for a new route; from then on, as on the free tier, only your latest plan is kept.
 
 ## Part E. Outside data and services
 
